@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vẽ Hàm</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/images/background.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'DejaVu Sans', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9); /* Nền trắng với độ trong suốt */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng cho container */
+        }
+        h1 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; /* Màu sắc bảy sắc cầu vồng cho tiêu đề */
+            text-align: center; /* Căn giữa tiêu đề */
+            margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+        }
+        input {
+            color: #000; /* Màu văn bản */
+            border: 2px solid #007BFF; /* Đường viền cho input */
+            padding: 10px; /* Padding cho input */
+            background-color: #fff; /* Màu nền cho input */
+        }
+        input:focus {
+            outline: none; /* Bỏ viền khi focus */
+            border-color: #0056b3; /* Đổi màu đường viền khi focus */
+        }
+        a {
+            color: #007BFF; /* Màu liên kết */
+            font-weight: bold; /* Đậm cho liên kết */
+        }
+        a:hover {
+            text-decoration: underline; /* Gạch chân khi di chuột */
+        }
+        .btn-keyboard {
+            margin: 5px; /* Khoảng cách giữa các nút */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Vẽ Hàm f(x) và Vẽ f'(x)</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="expression">Nhập hàm:</label>
+                <input type="text" class="form-control" id="expression" name="expression" required>
+            </div>
+            <div class="mb-3" id="keyboard">
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('x')">x</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('y')">y</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('+')">+</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('-')">-</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('*')">*</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('/')">/</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('**')">^</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('(')">(</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression(')')">)</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sin')">sin</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('cos')">cos</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('tan')">tan</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('log')">log</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sqrt')">√</button>
+            </div>
+            <div class="form-group">
+                <label for="variable">Tên biến:</label>
+                <input type="text" class="form-control" id="variable" name="variable" required>
+            </div>
+            <div class="form-group">
+                <label for="x_start">Giá trị bắt đầu cho x:</label>
+                <input type="number" class="form-control" id="x_start" name="x_start" required>
+            </div>
+            <div class="form-group">
+                <label for="x_end">Giá trị kết thúc cho x:</label>
+                <input type="number" class="form-control" id="x_end" name="x_end" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Vẽ</button>
+        </form>
+
+        {% if plot_url %}
+            <h2>Đồ thị</h2>
+            {{ plot_url|safe }}
+        {% endif %}
+
+        <a href="/">Trở về trang chính</a>
+    </div>
+
+    <script>
+        function addToExpression(symbol) {
+            const expressionInput = document.getElementById('expression');
+            expressionInput.value += symbol;
+            expressionInput.focus();
+        }
+    </script>
+</body>
+</html>

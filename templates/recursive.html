@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải Đệ Quy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/images/background.gif'); /* Hình nền */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'DejaVu Sans', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9); /* Nền trắng với độ trong suốt */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng cho container */
+        }
+        h1 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; /* Màu sắc bảy sắc cầu vồng cho tiêu đề */
+            text-align: center; /* Căn giữa tiêu đề */
+            margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+        }
+        input {
+            color: #000; /* Màu văn bản */
+            border: 2px solid #007BFF; /* Đường viền cho input */
+            padding: 10px; /* Padding cho input */
+            background-color: #fff; /* Màu nền cho input */
+        }
+        input:focus {
+            outline: none; /* Bỏ viền khi focus */
+            border-color: #0056b3; /* Đổi màu đường viền khi focus */
+        }
+        a {
+            color: #007BFF; /* Màu liên kết */
+            font-weight: bold; /* Đậm cho liên kết */
+        }
+        a:hover {
+            text-decoration: underline; /* Gạch chân khi di chuột */
+        }
+        .btn-keyboard {
+            margin: 5px; /* Khoảng cách giữa các nút */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Giải Đệ Quy U(n)</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="base_case">Giá trị khởi tạo (U(1)):</label>
+                <input type="number" class="form-control" id="base_case" name="base_case" required>
+            </div>
+            <div class="form-group">
+                <label for="func_str">Nhập quy tắc đệ quy:</label>
+                <input type="text" class="form-control" id="func_str" name="func_str" required>
+                <small class="form-text text-muted">Sử dụng các ký hiệu như: x, y, +, -, *, /, ^, sin, cos, log, sqrt</small>
+            </div>
+            <div class="form-group">
+                <label for="n">Nhập n để tính giá trị:</label>
+                <input type="number" class="form-control" id="n" name="n" required>
+            </div>
+            <div>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('x')">x</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('y')">y</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('+')">+</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('-')">-</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('*')">*</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('/')">/</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('**')">^</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('(')">(</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression(')')">)</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sin')">sin</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('cos')">cos</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('tan')">tan</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('log')">log</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sqrt')">√</button>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Giải</button>
+        </form>
+
+        {% if result is not none %}
+        <div class="mt-3">
+            <h4>Kết quả: {{ result }}</h4>
+        </div>
+        {% endif %}
+
+        <a href="/">Trở về trang chính</a>
+    </div>
+
+    <script>
+        function addToExpression(value) {
+            var input = document.getElementById('func_str');
+            input.value += value; // Thêm giá trị vào ô nhập
+            input.focus(); // Đặt con trỏ vào ô nhập
+        }
+    </script>
+</body>
+</html>

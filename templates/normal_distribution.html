@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân phối chuẩn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/images/background.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'DejaVu Sans', sans-serif;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .plot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vẽ phân phối chuẩn</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="mean">Trung bình (mean):</label>
+                <input type="number" step="any" class="form-control" id="mean" name="mean" value="0" required>
+            </div>
+            <div class="form-group">
+                <label for="std_dev">Độ lệch chuẩn (standard deviation):</label>
+                <input type="number" step="any" class="form-control" id="std_dev" name="std_dev" value="1" required>
+            </div>
+            <div class="form-group">
+                <label for="x_start">Giá trị bắt đầu (x_start):</label>
+                <input type="number" step="any" class="form-control" id="x_start" name="x_start" value="-4" required>
+            </div>
+            <div class="form-group">
+                <label for="x_end">Giá trị kết thúc (x_end):</label>
+                <input type="number" step="any" class="form-control" id="x_end" name="x_end" value="4" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Vẽ đồ thị</button>
+        </form>
+
+        <div class="plot-container">
+            {% if plot_url %}
+                <h2>Đồ thị phân phối chuẩn</h2>
+                <img src="{{ plot_url }}" alt="Normal Distribution Plot">
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

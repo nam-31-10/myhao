@@ -1,0 +1,25 @@
+body {
+    font-family: 'DejaVu Sans', sans-serif;
+}
+
+input, textarea {
+    font-family: 'DejaVu Sans', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s;
+    color: #ff4500; /* Màu chữ cho input và textarea, ví dụ: cam */
+}
+
+input:focus, textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 50px;
+}

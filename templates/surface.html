@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vẽ Hàm 3D</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+    <style>
+        body {
+            background-color: #f8f9fa; /* Màu nền nhẹ */
+        }
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: white; /* Nền trắng cho container */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng cho container */
+        }
+        h1 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; /* Màu sắc bảy sắc cầu vồng cho tiêu đề */
+            text-align: center; /* Căn giữa tiêu đề */
+            margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+        }
+        input {
+            color: #000; /* Màu văn bản */
+            border: 2px solid #007BFF; /* Đường viền cho input */
+            padding: 10px; /* Padding cho input */
+            background-color: #fff; /* Màu nền cho input */
+        }
+        input:focus {
+            outline: none; /* Bỏ viền khi focus */
+            border-color: #0056b3; /* Đổi màu đường viền khi focus */
+        }
+        a {
+            color: #007BFF; /* Màu liên kết */
+            font-weight: bold; /* Đậm cho liên kết */
+        }
+        a:hover {
+            text-decoration: underline; /* Gạch chân khi di chuột */
+        }
+        .btn-keyboard {
+            margin: 5px; /* Khoảng cách giữa các nút */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Vẽ Hàm 3D f(x,y) = z</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="expression">Nhập hàm f(x,y):</label>
+                <input type="text" class="form-control" id="expression" name="expression" required placeholder="Ví dụ: x^2 + y^2">
+                <small class="form-text text-muted">Sử dụng các ký hiệu như: x^2, x + 2, log(x), sqrt(x)</small>
+            </div>
+            <div class="form-group">
+                <label for="x_start">Giá trị bắt đầu cho x:</label>
+                <input type="number" class="form-control" id="x_start" name="x_start" required>
+            </div>
+            <div class="form-group">
+                <label for="x_end">Giá trị kết thúc cho x:</label>
+                <input type="number" class="form-control" id="x_end" name="x_end" required>
+            </div>
+            <div class="form-group">
+                <label for="y_start">Giá trị bắt đầu cho y:</label>
+                <input type="number" class="form-control" id="y_start" name="y_start" required>
+            </div>
+            <div class="form-group">
+                <label for="y_end">Giá trị kết thúc cho y:</label>
+                <input type="number" class="form-control" id="y_end" name="y_end" required>
+            </div>
+            <div>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('x')">x</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('y')">y</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('+')">+</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('-')">-</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('*')">*</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('/')">/</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('**')">^</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('(')">(</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression(')')">)</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sin')">sin</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('cos')">cos</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('tan')">tan</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('log')">log</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sqrt')">√</button>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Vẽ</button>
+        </form>
+
+        {% if plot_url %}
+            <h2>Đồ thị 3D</h2>
+            <img src="data:image/png;base64,{{ plot_url }}" alt="3D Plot" class="img-fluid">
+        {% endif %}
+
+        <a href="/">Trở về trang chính</a>
+    </div>
+
+    <script>
+        function addToExpression(value) {
+            var input = document.getElementById('expression');
+            input.value += value; // Thêm giá trị vào ô nhập
+            input.focus(); // Đặt con trỏ vào ô nhập
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vẽ Miền Nghiệm</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-image: url('/static/images/background.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'DejaVu Sans', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        textarea, input {
+            color: #000;
+            border: 2px solid #007BFF;
+            padding: 10px;
+            background-color: #fff;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #0056b3;
+        }
+        .plot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #007BFF;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn-keyboard {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vẽ Miền Nghiệm</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="inequalities">Nhập bất phương trình (mỗi dòng một bất phương trình):</label>
+                <textarea id="inequalities" name="inequalities" class="form-control" rows="5" placeholder="Ví dụ: x + y &lt; 10&#10; x - y &gt; 2"></textarea>
+            </div>
+            <div class="mb-3" id="keyboard">
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('x')">x</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('y')">y</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('+')">+</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('-')">-</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('*')">*</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('/')">/</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('**')">^</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('(')">(</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression(')')">)</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sin')">sin</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('cos')">cos</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('tan')">tan</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('log')">log</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sqrt')">√</button>
+            </div>
+            <div class="form-group">
+                <label for="x_range">Khoảng giá trị cho x:</label>
+                <input type="text" id="x_range" name="x_range" class="form-control" placeholder="Nhập khoảng (ví dụ: -10, 10)">
+            </div>
+            <div class="form-group">
+                <label for="y_range">Khoảng giá trị cho y:</label>
+                <input type="text" id="y_range" name="y_range" class="form-control" placeholder="Nhập khoảng (ví dụ: -10, 10)">
+            </div>
+            <button type="submit" class="btn btn-primary">Vẽ miền nghiệm</button>
+        </form>
+
+        <div class="plot-container">
+            {% if plot_url %}
+                <h2>Đồ thị miền nghiệm:</h2>
+                <img src="data:image/png;base64,{{ plot_url }}" alt="Miền nghiệm">
+            {% endif %}
+        </div>
+
+        <a href="/">Trở về trang chính</a>
+    </div>
+
+    <script>
+        function addToExpression(symbol) {
+            const inequalitiesInput = document.getElementById('inequalities');
+            inequalitiesInput.value += symbol;
+            inequalitiesInput.focus();
+        }
+    </script>
+</body>
+</html>

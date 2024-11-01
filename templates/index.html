@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng Toán học</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-image: url('/static/images/background.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'DejaVu Sans', sans-serif;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+        }
+        h1 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .list-group-item a {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        .list-group-item a:hover {
+            text-decoration: underline;
+        }
+        input, textarea {
+            font-family: 'DejaVu Sans', sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ứng dụng Toán học</h1>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/calculate">Tính toán biểu thức</a></li>
+            <li class="list-group-item"><a href="/solve">Giải phương trình</a></li>
+            <li class="list-group-item"><a href="/plot">Vẽ hàm và bảng biến thiên</a></li>
+            <li class="list-group-item"><a href="/integrate">Giải nguyên hàm</a></li>
+            <li class="list-group-item"><a href="/recursive">Giải đệ quy U(n)</a></li>
+            <li class="list-group-item"><a href="/limit">Tính giới hạn</a></li>
+            <li class="list-group-item"><a href="/surface">Vẽ hàm 3D f(x,y) = z</a></li>
+            <li class="list-group-item"><a href="/feasible_region">Vẽ miền nghiệm</a></li>
+            <li class="list-group-item"><a href="/constraints">Tìm ràng buộc cho x khi y thuộc (a, b)</a></li>
+            <li class="list-group-item"><a href="/extrema">Tìm cực trị hàm hai biến</a></li>
+            <li class="list-group-item"><a href="/normal_distribution">Vẽ phân phối chuẩn</a></li>
+            <li class="list-group-item"><a href="/chi_squared_distribution">Vẽ phân phối chi bình phương</a></li>
+            <li class="list-group-item"><a href="/poisson_distribution">Vẽ phân phối Poisson</a></li>
+        </ul>
+    </div>
+</body>
+</html>
+

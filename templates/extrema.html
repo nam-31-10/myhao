@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Cực Trị Hàm Hai Biến</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-image: url('/static/images/background.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'DejaVu Sans', sans-serif;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+        }
+        h1 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input {
+            color: #000;
+            border: 2px solid #007BFF;
+            padding: 10px;
+            background-color: #fff;
+        }
+        input:focus {
+            outline: none;
+            border-color: #0056b3;
+        }
+        a {
+            color: #007BFF;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn-keyboard {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Tìm Cực Trị Hàm Hai Biến</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="expression">Nhập hàm f(x,y):</label>
+                <input type="text" class="form-control" id="expression" name="expression" required>
+            </div>
+            <div id="keyboard" class="mb-3">
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('x')">x</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('y')">y</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('+')">+</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('-')">-</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('*')">*</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('/')">/</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('**')">^</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('(')">(</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression(')')">)</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sin')">sin</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('cos')">cos</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('tan')">tan</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('log')">log</button>
+                <button type="button" class="btn btn-light btn-keyboard" onclick="addToExpression('sqrt')">√</button>
+            </div>
+            <button type="submit" class="btn btn-primary">Tìm</button>
+        </form>
+
+        {% if extrema is not none %}
+        <div class="mt-3">
+            <h4>Cực trị: {{ extrema }}</h4>
+        </div>
+        {% endif %}
+
+        <a href="/">Trở về trang chính</a>
+    </div>
+
+    <script>
+        function addToExpression(symbol) {
+            const expressionInput = document.getElementById('expression');
+            expressionInput.value += symbol;
+            expressionInput.focus();
+        }
+    </script>
+</body>
+</html>
